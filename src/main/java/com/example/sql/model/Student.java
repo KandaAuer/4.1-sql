@@ -1,21 +1,24 @@
 package com.example.sql.model;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.*;
 
 @Entity
-public class Student {
+public class Student<Faculty> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private int age;
 
-    // Getters and Setters
+    @Column(unique = true, nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private Integer age = 20; // Значение по умолчанию
+
+    public Student(Faculty faculty) {
+    }
+
+    // Геттеры и сеттеры
 
     public Long getId() {
         return id;
