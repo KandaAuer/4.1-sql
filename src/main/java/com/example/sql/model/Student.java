@@ -3,22 +3,17 @@ package com.example.sql.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Student<Faculty> {
-
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
     private String name;
+    private int age;
 
-    @Column(nullable = false)
-    private Integer age = 20; // Значение по умолчанию
-
-    public Student(Faculty faculty) {
-    }
-
-    // Геттеры и сеттеры
+    @ManyToOne
+    @JoinColumn(name = "faculty_id")
+    private Faculty faculty;
 
     public Long getId() {
         return id;
@@ -42,5 +37,13 @@ public class Student<Faculty> {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
     }
 }
